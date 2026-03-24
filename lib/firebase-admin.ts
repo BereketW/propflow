@@ -13,11 +13,10 @@ const serviceAccount: ServiceAccount = {
 };
 
 export const adminApp =
-  getApps().length === 0
-    ? initializeApp({
-        credential: cert(serviceAccount),
-        databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-      })
-    : getApps()[0];
+  getApps()[0] ||
+  initializeApp({
+    credential: cert(serviceAccount),
+    databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  });
 
 export const adminDb = getDatabase(adminApp);
